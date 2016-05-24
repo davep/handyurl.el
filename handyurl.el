@@ -1,5 +1,5 @@
 ;;; handyurl.el --- Pop up a list of URLs and select for pasting.
-;; Copyright 1998-1999 by Dave Pearson <davep@hagbard.demon.co.uk>
+;; Copyright 1998-1999 by Dave Pearson <davep@davep.org>
 ;; $Revision: 1.11 $
 
 ;; handyurl is free software distributed under the terms of the GNU General
