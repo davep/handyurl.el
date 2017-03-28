@@ -119,7 +119,7 @@ Argument URL-FILE is the name of the file to read."
     (beginning-of-line)
     (let ((line-point (point)))
       (setf (point) (point-min))
-      (loop while (< (point) line-point) sum 1 do (next-line 1)))))
+      (loop while (< (point) line-point) sum 1 do (forward-line 1)))))
 
 (defun handy-url-insert (type)
   "Paste the url under the customer to the current buffer.
