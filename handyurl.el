@@ -24,10 +24,10 @@
 ;; The name and location of the file is up to you, the default name used by
 ;; the function `handyurl' is stored in `handyurl-file'.
 
-(eval-when-compile
-  (require 'cl))
-
 ;;; Code:
+
+(eval-when-compile
+  (require 'cl-lib))
 
 ;; Customize options.
 
@@ -96,7 +96,7 @@ The key bindings for `handyurl-mode' are:
   (setq buffer-read-only t))
 
 ;;;###autoload
-(defun* handyurl (&optional (url-file handyurl-file))
+(cl-defun handyurl (&optional (url-file handyurl-file))
   "Pick an URL from a list of URLs and paste it into the current buffer.
 URL-FILE is the name of the file to read the URL list from, if not supplied
 the file pointed to by `handyurl-file' is read."
