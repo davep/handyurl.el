@@ -29,18 +29,31 @@
 
 ;;; Code:
 
-(defvar handyurl-file (locate-user-emacs-file ".handyurls.el" "~/.handyurls")
-  "*Name of file from which `handyurl' should read the URLs.")
+;; Customize options.
 
-(defvar handyurl-mode-hook nil
-  "*Hooks for `handyurl-mode'.")
+(defgroup handyurl nil
+  "Insert an URL from a list of URLs."
+  :group 'convenience
+  :prefix "handyurl-")
 
-(defvar handyurl-sort-predicate #'(lambda (first second)
-                                     (string< (upcase (car first))
-                                              (upcase (car second))))
+(defcustom handyurl-file (locate-user-emacs-file ".handyurls.el" "~/.handyurls")
+  "*Name of file from which `handyurl' should read the URLs."
+  :type  'file
+  :group 'handyurl)
+
+(defcustom handyurl-mode-hook nil
+  "*Hooks for `handyurl-mode'."
+  :type  'hook
+  :group 'handyurl)
+
+(defcustom handyurl-sort-predicate #'(lambda (first second)
+                                       (string< (upcase (car first))
+                                                (upcase (car second))))
   "*Predicate for sorting the URLs before display.
 
-Setting this variable to NIL means \"don't sort\".")
+Setting this variable to NIL means \"don't sort\"."
+  :type  'function
+  :group 'handyurl)
 
 (defvar handyurl-urls nil
   "Contains the list of URL details.")
