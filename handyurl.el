@@ -22,104 +22,104 @@
 ;;  ( "The FSF"         . "http://www.fsf.org/"))
 ;;
 ;; The name and location of the file is up to you, the default name used by
-;; the function `handy-url' is stored in `handy-url-file'.
+;; the function `handyurl' is stored in `handyurl-file'.
 
 (eval-when-compile
   (require 'cl))
 
 ;;; Code:
 
-(defvar handy-url-file "~/.handy-urls"
-  "*Name of file from which `handy-url' should read the URLs.")
+(defvar handyurl-file "~/.handyurls"
+  "*Name of file from which `handyurl' should read the URLs.")
 
-(defvar handy-url-mode-hook nil
-  "*Hooks for `handy-url-mode'.")
+(defvar handyurl-mode-hook nil
+  "*Hooks for `handyurl-mode'.")
 
-(defvar handy-url-sort-predicate #'(lambda (first second)
+(defvar handyurl-sort-predicate #'(lambda (first second)
                                      (string< (upcase (car first))
                                               (upcase (car second))))
   "*Predicate for sorting the URLs before display.
 
 Setting this variable to NIL means \"don't sort\".")
 
-(defvar handy-url-urls nil
+(defvar handyurl-urls nil
   "Contains the list of URL details.")
 
-(defvar handy-url-last-buffer nil
+(defvar handyurl-last-buffer nil
   "Pointer to the calling buffer.")
 
-(defvar handy-url-mode-map nil
-  "Local keymap for the `handy-url' buffer.")
+(defvar handyurl-mode-map nil
+  "Local keymap for the `handyurl' buffer.")
 
-(defvar handy-url-buffer-name "*Handy-URL*"
+(defvar handyurl-buffer-name "*Handyurl*"
   "Name for the URL listing buffer.")
 
-(unless handy-url-mode-map
+(unless handyurl-mode-map
   (let ((map (make-sparse-keymap)))
     (suppress-keymap map t)
-    (define-key map [(control m)] #'handy-url-insert-url)
-    (define-key map "u"           #'handy-url-insert-naked-url)
-    (define-key map " "           #'handy-url-insert-url-with-name)
-    (define-key map "n"           #'handy-url-insert-name)
-    (define-key map [(control g)] #'handy-url-select-quit)
-    (define-key map "q"           #'handy-url-select-quit)
+    (define-key map [(control m)] #'handyurl-insert-url)
+    (define-key map "u"           #'handyurl-insert-naked-url)
+    (define-key map " "           #'handyurl-insert-url-with-name)
+    (define-key map "n"           #'handyurl-insert-name)
+    (define-key map [(control g)] #'handyurl-select-quit)
+    (define-key map "q"           #'handyurl-select-quit)
     (define-key map "?"           #'describe-mode)
-    (setq handy-url-mode-map map)))
+    (setq handyurl-mode-map map)))
 
-(put 'handy-url-mode 'mode-class 'special)
+(put 'handyurl-mode 'mode-class 'special)
 
-(defun handy-url-mode ()
-  "A mode for use with `handy-url'.
+(defun handyurl-mode ()
+  "A mode for use with `handyurl'.
 
-The key bindings for `handy-url-mode' are:
+The key bindings for `handyurl-mode' are:
 
-\\{handy-url-mode-map}"
+\\{handyurl-mode-map}"
   (interactive)
   (kill-all-local-variables)
-  (use-local-map handy-url-mode-map)
-  (setq major-mode 'handy-url-mode
+  (use-local-map handyurl-mode-map)
+  (setq major-mode 'handyurl-mode
 	mode-name  "Handy URL")
-  (run-hooks 'handy-url-mode-hook)
+  (run-hooks 'handyurl-mode-hook)
   (setq buffer-read-only t))
 
 ;;;###autoload
-(defun* handy-url (&optional (url-file handy-url-file))
+(defun* handyurl (&optional (url-file handyurl-file))
   "Pick an URL from a list of URLs and paste it into the current buffer.
 URL-FILE is the name of the file to read the URL list from, if not supplied
-the file pointed to by `handy-url-file' is read."
+the file pointed to by `handyurl-file' is read."
   (interactive)
-  (unless (string= (buffer-name) handy-url-buffer-name)
-    (setq handy-url-last-buffer (current-buffer)))
+  (unless (string= (buffer-name) handyurl-buffer-name)
+    (setq handyurl-last-buffer (current-buffer)))
   (if (file-exists-p url-file)
       (progn
-	(pop-to-buffer "*Handy-URL*")
+	(pop-to-buffer "*Handyurl*")
         (let ((buffer-read-only nil))
           (setf (buffer-string) "")
-          (handy-url-read-urls url-file)
-          (handy-url-display-urls)
+          (handyurl-read-urls url-file)
+          (handyurl-display-urls)
           (setf (point) (point-min)))
-        (handy-url-mode))
+        (handyurl-mode))
     (error "No such URL file '%s'" url-file)))
 
-(defun handy-url-read-urls (url-file)
-  "Read the URLS into the variable `handy-url-urls'.
+(defun handyurl-read-urls (url-file)
+  "Read the URLS into the variable `handyurl-urls'.
 
 Argument URL-FILE is the name of the file to read."
   (with-temp-buffer
     (insert-file-contents url-file t)
-    (setq handy-url-urls (read (current-buffer))))
-  (when handy-url-sort-predicate
-    (setq handy-url-urls (sort handy-url-urls handy-url-sort-predicate))))
+    (setq handyurl-urls (read (current-buffer))))
+  (when handyurl-sort-predicate
+    (setq handyurl-urls (sort handyurl-urls handyurl-sort-predicate))))
 
-(defun handy-url-display-urls ()
-  "Display the contans of `handy-url-urls' in the current buffer."
+(defun handyurl-display-urls ()
+  "Display the contans of `handyurl-urls' in the current buffer."
   (let ((fmt (format "%%-%ds - %%s\n"
-                     (apply #'max (loop for url in handy-url-urls
+                     (apply #'max (loop for url in handyurl-urls
                                         collect (length (car url)))))))
-    (loop for url in handy-url-urls
+    (loop for url in handyurl-urls
           do (insert (format fmt (car url) (cdr url))))))
 
-(defun handy-url-current-line ()
+(defun handyurl-current-line ()
   "Work out the current line number."
   (save-excursion
     (beginning-of-line)
@@ -127,13 +127,13 @@ Argument URL-FILE is the name of the file to read."
       (setf (point) (point-min))
       (loop while (< (point) line-point) sum 1 do (forward-line 1)))))
 
-(defun handy-url-insert (type)
+(defun handyurl-insert (type)
   "Paste the url under the customer to the current buffer.
 
 TYPE specifies the kind of formatting to apply."
-  (let ((url (nth (handy-url-current-line) handy-url-urls)))
+  (let ((url (nth (handyurl-current-line) handyurl-urls)))
     (if url
-	(with-current-buffer handy-url-last-buffer
+	(with-current-buffer handyurl-last-buffer
 	  (insert (case type
                     ('url       (format "<URL:%s>" (cdr url)))
                     ('naked-url (cdr url))
@@ -142,35 +142,35 @@ TYPE specifies the kind of formatting to apply."
       (error "No URL details on that line"))
     url))
 
-(defun handy-url-insert-url ()
+(defun handyurl-insert-url ()
   "Insert the selected URL into the buffer."
   (interactive)
-  (when (handy-url-insert 'url)
-    (handy-url-select-quit)))
+  (when (handyurl-insert 'url)
+    (handyurl-select-quit)))
 
-(defun handy-url-insert-naked-url ()
+(defun handyurl-insert-naked-url ()
   "Insert the selected URL into the buffer (with no formatting)."
   (interactive)
-  (when (handy-url-insert 'naked-url)
-    (handy-url-select-quit)))
+  (when (handyurl-insert 'naked-url)
+    (handyurl-select-quit)))
 
-(defun handy-url-insert-url-with-name ()
+(defun handyurl-insert-url-with-name ()
   "Insert the site name and the URL."
   (interactive)
-  (when (handy-url-insert 'with-name)
-    (handy-url-select-quit)))
+  (when (handyurl-insert 'with-name)
+    (handyurl-select-quit)))
 
-(defun handy-url-insert-name ()
+(defun handyurl-insert-name ()
   "Insert the name of the site."
   (interactive)
-  (when (handy-url-insert 'name)
-    (handy-url-select-quit)))
+  (when (handyurl-insert 'name)
+    (handyurl-select-quit)))
 
-(defun handy-url-select-quit ()
-  "Kill the Handy-URL frame."
+(defun handyurl-select-quit ()
+  "Kill the Handyurl frame."
   (interactive)
-  (kill-buffer handy-url-buffer-name)
-  (switch-to-buffer handy-url-last-buffer)
+  (kill-buffer handyurl-buffer-name)
+  (switch-to-buffer handyurl-last-buffer)
   (delete-other-windows))
 
 (provide 'handyurl)
