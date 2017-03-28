@@ -14,7 +14,7 @@
 ;;
 ;; (( "The GNU Project" . "http://www.gnu.org/")
 ;;  ( "The FSF"         . "http://www.fsf.org/"))
-;;  
+;;
 ;; The name and location of the file is up to you, the default name used by
 ;; the function `handy-url' is stored in `handy-url-file'.
 
@@ -118,7 +118,7 @@ The key bindings for `handy-url-mode' are:
 	mode-name  "Handy URL")
   (run-hooks 'handy-url-mode-hook)
   (setq buffer-read-only t))
-	
+
 ;;;###autoload
 (defun* handy-url (&optional (url-file handy-url-file))
   "Pick an URL from a list of URLs and paste it into the current buffer.
