@@ -76,8 +76,9 @@
 (defvar handy-url-sort-predicate #'(lambda (first second)
                                      (string< (upcase (car first))
                                               (upcase (car second))))
-  "*Predicate for sorting the URLs before display. Setting this variable to
-NIL means \"don't sort\".")
+  "*Predicate for sorting the URLs before display.
+
+Setting this variable to NIL means \"don't sort\".")
 
 (defvar handy-url-urls nil
   "Contains the list of URL details.")
@@ -139,8 +140,9 @@ the file pointed to by `handy-url-file' is read."
     (error "No such URL file '%s'" url-file)))
 
 (defun handy-url-read-urls (url-file)
-  "Read the URLS into the variable `handy-url-urls'. Argument URL-FILE is
-the name of the file to read."
+  "Read the URLS into the variable `handy-url-urls'.
+
+Argument URL-FILE is the name of the file to read."
   (with-temp-buffer
     (insert-file-contents url-file t)
     (setq handy-url-urls (read (current-buffer))))
@@ -164,8 +166,9 @@ the name of the file to read."
       (loop while (< (point) line-point) sum 1 do (next-line 1)))))
 
 (defun handy-url-insert (type)
-  "Paste the url under the customer to the current buffer. TYPE specifies
-the kind of formatting to apply."
+  "Paste the url under the customer to the current buffer.
+
+TYPE specifies the kind of formatting to apply."
   (let ((url (nth (handy-url-current-line) handy-url-urls)))
     (if url
 	(with-current-buffer handy-url-last-buffer
