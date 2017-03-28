@@ -2,7 +2,7 @@
 ;; Copyright 1998-2017 by Dave Pearson <davep@davep.org>
 
 ;; Author: Dave Pearson <davep@davep.org>
-;; Version: 1.11
+;; Version: 2.0
 ;; Keywords: convenience, quoting
 ;; URL: https://github.com/davep/handyurl.el
 ;; Package-Requires: ((cl-lib "0.5"))
