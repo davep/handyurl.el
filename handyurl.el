@@ -29,7 +29,7 @@
 
 ;;; Code:
 
-(defvar handyurl-file "~/.handyurls"
+(defvar handyurl-file (locate-user-emacs-file ".handyurls.el" "~/.handyurls")
   "*Name of file from which `handyurl' should read the URLs.")
 
 (defvar handyurl-mode-hook nil
