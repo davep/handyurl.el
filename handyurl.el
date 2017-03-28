@@ -1,9 +1,15 @@
 ;;; handyurl.el --- Pop up a list of URLs and select for pasting.
-;; Copyright 1998-1999 by Dave Pearson <davep@hagbard.demon.co.uk>
-;; $Revision: 1.11 $
+;; Copyright 1998-2017 by Dave Pearson <davep@davep.org>
 
-;; handyurl is free software distributed under the terms of the GNU General
-;; Public Licence, version 2. For details see the file COPYING.
+;; Author: Dave Pearson <davep@davep.org>
+;; Version: 1.11
+;; Keywords: convenience, quoting
+;; URL: https://github.com/davep/handyurl.el
+;; Package-Requires: ((cl-lib "0.5"))
+
+;; handyurl.el is free software distributed under the terms of the GNU
+;; General Public Licence, version 2 or (at your option) any later version.
+;; For details see the file COPYING.
 
 ;;; Commentary:
 ;;
