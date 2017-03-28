@@ -141,7 +141,7 @@ Argument URL-FILE is the name of the file to read."
       (loop while (< (point) line-point) sum 1 do (forward-line 1)))))
 
 (defun handyurl-insert (type)
-  "Paste the url under the customer to the current buffer.
+  "Paste the url under the cursor to the current buffer.
 
 TYPE specifies the kind of formatting to apply."
   (let ((url (nth (handyurl-current-line) handyurl-urls)))
