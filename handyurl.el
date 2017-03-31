@@ -127,10 +127,10 @@ Argument URL-FILE is the name of the file to read."
 (defun handyurl-display-urls ()
   "Display the contents of `handyurl-urls' in the current buffer."
   (let ((fmt (format "%%-%ds - %%s\n"
-                     (apply #'max (loop for url in handyurl-urls
-                                        collect (length (car url)))))))
-    (loop for url in handyurl-urls
-          do (insert (format fmt (car url) (cdr url))))))
+                     (apply #'max (cl-loop for url in handyurl-urls
+                                     collect (length (car url)))))))
+    (cl-loop for url in handyurl-urls
+       do (insert (format fmt (car url) (cdr url))))))
 
 (defun handyurl-current-line ()
   "Work out the current line number."
@@ -138,7 +138,7 @@ Argument URL-FILE is the name of the file to read."
     (beginning-of-line)
     (let ((line-point (point)))
       (setf (point) (point-min))
-      (loop while (< (point) line-point) sum 1 do (forward-line 1)))))
+      (cl-loop while (< (point) line-point) sum 1 do (forward-line 1)))))
 
 (defun handyurl-insert (type)
   "Paste the url under the cursor to the current buffer.
