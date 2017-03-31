@@ -3,7 +3,7 @@
 
 ;; Author: Dave Pearson <davep@davep.org>
 ;; Version: 2.0
-;; Keywords: convenience, quoting
+;; Keywords: convenience, quoting, url, bookmark
 ;; URL: https://github.com/davep/handyurl.el
 ;; Package-Requires: ((cl-lib "0.5"))
 
