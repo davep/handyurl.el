@@ -23,6 +23,9 @@
 ;;
 ;; The name and location of the file is up to you, the default name used by
 ;; the function `handyurl' is stored in `handyurl-file'.
+;;
+;; Note that this code then went on to inspire quickurl.el, which then went
+;; on to be part of GNU emacs itself.
 
 ;;; Code:
 
