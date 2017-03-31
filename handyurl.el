@@ -25,7 +25,7 @@
 ;; the function `handyurl' is stored in `handyurl-file'.
 ;;
 ;; Note that this code then went on to inspire quickurl.el, which then went
-;; on to be part of GNU emacs itself.
+;; on to be part of GNU Emacs itself.
 
 ;;; Code:
 
