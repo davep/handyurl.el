@@ -125,7 +125,7 @@ Argument URL-FILE is the name of the file to read."
     (setq handyurl-urls (sort handyurl-urls handyurl-sort-predicate))))
 
 (defun handyurl-display-urls ()
-  "Display the contans of `handyurl-urls' in the current buffer."
+  "Display the contents of `handyurl-urls' in the current buffer."
   (let ((fmt (format "%%-%ds - %%s\n"
                      (apply #'max (loop for url in handyurl-urls
                                         collect (length (car url)))))))
